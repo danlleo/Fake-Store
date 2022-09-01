@@ -1,0 +1,23 @@
+.product {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.product__rating {
+  position: absolute;
+  right: 0;
+}
+
+.product__rating p span {
+  color: gold;
+}
+
+.product .product__description {
+  color: #666;
+  padding: 1rem 0 0.5rem;
+}
+
+.product .product__price {
+  color: #666;
+}
