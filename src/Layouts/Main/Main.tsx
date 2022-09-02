@@ -1,5 +1,6 @@
 import Product from '../../Components/Product/Product'
 import axios from 'axios'
+import { BarLoader } from 'react-spinners'
 import { useState, useEffect } from 'react'
 import './Main.css'
 
@@ -25,7 +26,7 @@ const Main = () => {
   }, [])
 
   return loading ? (
-    <>Loading</>
+    <BarLoader style={{ width: '100%' }} />
   ) : (
     <main className='mw-1340'>
       <div className='main__info'>
@@ -41,6 +42,8 @@ const Main = () => {
             image={product.image}
             description={product.description}
             price={product.price}
+            title={product.title}
+            key={product.id}
           />
         ))}
       </div>
