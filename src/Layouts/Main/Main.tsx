@@ -6,6 +6,7 @@ import { BarLoader } from 'react-spinners'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './Main.css'
+import CartButton from '../../Components/CartButton/CartButton'
 
 interface Rating {
   rate: number
@@ -73,6 +74,7 @@ const Main = ({ category }: Props) => {
             />
           ))}
         </div>
+        <CartButton />
       </main>
       <Footer />
     </motion.div>
