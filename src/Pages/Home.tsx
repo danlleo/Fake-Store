@@ -1,7 +1,7 @@
 import Main from '../Layouts/Main/Main'
 
 const Home = () => {
-  return <Main />
+  return <Main category='' />
 }
 
 export default Home

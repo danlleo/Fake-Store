@@ -1,5 +1,4 @@
 import Header from './Layouts/Header/Header'
-import Footer from './Layouts/Footer/Footer'
 import AnimatedRoutes from './Utils/AnimatedRoutes'
 
 const App = () => {
@@ -7,7 +6,6 @@ const App = () => {
     <>
       <Header />
       <AnimatedRoutes />
-      <Footer />
     </>
   )
 }

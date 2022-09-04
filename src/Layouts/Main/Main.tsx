@@ -1,8 +1,10 @@
 import Product from '../../Components/Product/Product'
+import Footer from '../Footer/Footer'
 import { useAppDispatch, useAppSelector } from '../../Store'
 import { getAll, getByCategory } from '../../Store/features/itemsSlice'
 import { BarLoader } from 'react-spinners'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import './Main.css'
 
 interface Rating {
@@ -20,40 +22,60 @@ interface ProductItem {
   rating: Rating
 }
 
-const Main = () => {
+interface Props {
+  category: string
+}
+
+const Main = ({ category }: Props) => {
   const dispatch = useAppDispatch()
   const loading = useAppSelector((state) => state.products.loading)
   const entities: ProductItem[] = useAppSelector(
     (state) => state.products.entities
   )
 
+  const loadData = () => {
+    if (!category) {
+      dispatch(getAll())
+      return
+    }
+    dispatch(getByCategory(category))
+  }
+
   useEffect(() => {
-    dispatch(getAll())
+    loadData()
   }, [])
 
   return loading ? (
     <BarLoader style={{ width: '100%' }} />
   ) : (
-    <main className='mw-1340'>
-      <div className='main__info' onClick={() => console.log(entities[0]?.id)}>
-        <p>Незабаром запрацює нова українськомовна версія сайту.</p>
-      </div>
-      <div className='main__banner'>
-        <p>We are now open in NY and LA. Come pay us a visit!</p>
-      </div>
-      <div className='main__content'>
-        {entities.map((product) => (
-          <Product
-            rating={product.rating.rate}
-            image={product.image}
-            description={product.description}
-            price={product.price}
-            title={product.title}
-            key={product.id}
-          />
-        ))}
-      </div>
-    </main>
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <main className='mw-1340'>
+        <div className='main__info'>
+          <p>Незабаром запрацює нова українськомовна версія сайту.</p>
+        </div>
+        <div className='main__banner'>
+          <p>We are now open in NY and LA. Come pay us a visit!</p>
+        </div>
+        <div className='main__content'>
+          {entities.map((product) => (
+            <Product
+              rating={product.rating.rate}
+              image={product.image}
+              description={product.description}
+              price={product.price}
+              title={product.title}
+              key={product.id}
+            />
+          ))}
+        </div>
+      </main>
+      <Footer />
+    </motion.div>
   )
 }
 
