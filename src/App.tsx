@@ -1,12 +1,12 @@
 import Header from './Layouts/Header/Header'
-import Main from './Layouts/Main/Main'
 import Footer from './Layouts/Footer/Footer'
+import AnimatedRoutes from './Utils/AnimatedRoutes'
 
 const App = () => {
   return (
     <>
       <Header />
-      <Main />
+      <AnimatedRoutes />
       <Footer />
     </>
   )

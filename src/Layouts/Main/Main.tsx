@@ -1,42 +1,48 @@
 import Product from '../../Components/Product/Product'
-import axios from 'axios'
+import { useAppDispatch, useAppSelector } from '../../Store'
+import { getAll, getByCategory } from '../../Store/features/itemsSlice'
 import { BarLoader } from 'react-spinners'
 import { useState, useEffect } from 'react'
 import './Main.css'
 
-const Main = () => {
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<any[]>([])
+interface Rating {
+  rate: number
+  count: number
+}
 
-  const loadData = async () => {
-    await axios
-      .get('https://fakestoreapi.com/products')
-      .then((data: any) => {
-        setData(data.data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
-  }
+interface ProductItem {
+  id: number
+  title: string
+  price: number
+  description: string
+  category: string
+  image: string
+  rating: Rating
+}
+
+const Main = () => {
+  const dispatch = useAppDispatch()
+  const loading = useAppSelector((state) => state.products.loading)
+  const entities: ProductItem[] = useAppSelector(
+    (state) => state.products.entities
+  )
 
   useEffect(() => {
-    loadData()
+    dispatch(getAll())
   }, [])
 
   return loading ? (
     <BarLoader style={{ width: '100%' }} />
   ) : (
     <main className='mw-1340'>
-      <div className='main__info'>
+      <div className='main__info' onClick={() => console.log(entities[0]?.id)}>
         <p>Незабаром запрацює нова українськомовна версія сайту.</p>
       </div>
       <div className='main__banner'>
         <p>We are now open in NY and LA. Come pay us a visit!</p>
       </div>
       <div className='main__content'>
-        {data.map((product) => (
+        {entities.map((product) => (
           <Product
             rating={product.rating.rate}
             image={product.image}

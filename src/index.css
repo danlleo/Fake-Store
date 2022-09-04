@@ -7,38 +7,11 @@
   font-family: 'Roboto', sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .mw-1340 {
   width: 1340px;
   margin: 0 auto;
-}
-
-header .header__content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #fff;
-}
-
-header .header__content .header__content__logo {
-  text-transform: uppercase;
-  letter-spacing: 5px;
-}
-
-header .header__content ul {
-  display: flex;
-  list-style: none;
-}
-
-header .header__content ul li {
-  padding: 0.5rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  transition: all 0.2s ease-in-out;
-}
-
-header .header__content ul li:hover {
-  color: #f4ca16;
 }
