@@ -1,12 +1,12 @@
 import Product from '../../Components/Product/Product'
 import Footer from '../Footer/Footer'
+import CartButton from '../../Components/CartButton/CartButton'
 import { useAppDispatch, useAppSelector } from '../../Store'
 import { getAll, getByCategory } from '../../Store/features/itemsSlice'
 import { BarLoader } from 'react-spinners'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './Main.css'
-import CartButton from '../../Components/CartButton/CartButton'
 
 interface Rating {
   rate: number

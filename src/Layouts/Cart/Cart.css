@@ -1,0 +1,8 @@
+.cart {
+  position: absolute;
+  background: greenyellow;
+  height: 100%;
+  width: 430px;
+  right: 0;
+  z-index: 999;
+}
