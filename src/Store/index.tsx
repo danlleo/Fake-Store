@@ -1,9 +1,10 @@
-import itemsSlice from './features/itemsSlice'
+import itemsReducer from './features/itemsSlice'
+import cartReducer from './features/cartSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 const store = configureStore({
-  reducer: { products: itemsSlice },
+  reducer: { products: itemsReducer, cart: cartReducer },
 })
 
 export type RootState = ReturnType<typeof store.getState>
