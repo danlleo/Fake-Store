@@ -1,9 +1,12 @@
+import CartItem from './CartItem'
 import { close } from '../../Store/features/cartSlice'
-import { useAppDispatch } from '../../Store'
+import { useAppSelector, useAppDispatch } from '../../Store'
 import './Cart.css'
 
 const Cart = () => {
   const dispatch = useAppDispatch()
+  const cartList = useAppSelector((state) => state.cartList.entities)
+  const totalPrice = useAppSelector((state) => state.cartList.price)
 
   return (
     <div style={{ zIndex: '1000', position: 'relative' }}>
@@ -13,7 +16,7 @@ const Cart = () => {
           onClick={() => dispatch(close())}
         ></div>
         <div className='cart__container'>
-          <div
+          {/* <div
             className='cart__container-area'
             onClick={() => dispatch(close())}
           >
@@ -27,6 +30,19 @@ const Cart = () => {
                 ></path>
               </svg>
             </button>
+          </div> */}
+          {cartList.map((item) => (
+            <CartItem
+              title={item.title}
+              image={item.image}
+              price={item.price}
+              quantity={1}
+              key={item.title}
+              id={item.id}
+            />
+          ))}
+          <div>
+            <h1>Total price: {totalPrice} $</h1>
           </div>
         </div>
       </div>

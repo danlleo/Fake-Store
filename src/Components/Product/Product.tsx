@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useAppDispatch } from '../../Store'
+import { addToCart, getTotalPrice } from '../../Store/features/cartListSlice'
 import './Product.css'
 
 interface IProduct {
@@ -7,10 +9,25 @@ interface IProduct {
   description: string
   price: number
   title: string
+  id: number
 }
 
-const Product = ({ rating, image, description, price, title }: IProduct) => {
+const Product = ({
+  rating,
+  image,
+  description,
+  price,
+  title,
+  id,
+}: IProduct) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const dispatch = useAppDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ title, image, price, 1: Number, id }))
+    dispatch(getTotalPrice())
+  }
 
   return (
     <>
@@ -49,7 +66,7 @@ const Product = ({ rating, image, description, price, title }: IProduct) => {
                   $ {price}
                 </h3>
               </div>
-              <button>ADD TO CART</button>
+              <button onClick={() => handleAddToCart()}>ADD TO CART</button>
             </div>
           </div>
         </div>

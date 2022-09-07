@@ -70,6 +70,7 @@ const Main = ({ category }: Props) => {
               description={product.description}
               price={product.price}
               title={product.title}
+              id={product.id}
               key={product.id}
             />
           ))}
