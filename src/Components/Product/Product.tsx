@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../Store'
-import { addToCart, getTotalPrice } from '../../Store/features/cartListSlice'
+import {
+  addToCart,
+  getTotalPrice,
+  removeFromCart,
+} from '../../Store/features/cartListSlice'
 import './Product.css'
 
 interface IProduct {
@@ -9,6 +13,7 @@ interface IProduct {
   description: string
   price: number
   title: string
+  category: string
   id: number
 }
 
@@ -18,6 +23,7 @@ const Product = ({
   description,
   price,
   title,
+  category,
   id,
 }: IProduct) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,8 +32,12 @@ const Product = ({
   const dispatch = useAppDispatch()
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ title, image, price, id, quantity: 1 }))
+    dispatch(addToCart({ title, image, price, id, quantity: 1, category }))
     dispatch(getTotalPrice())
+  }
+
+  const contains = () => {
+    return !!cartList.find((element) => element.id === id)
   }
 
   return (
@@ -67,7 +77,13 @@ const Product = ({
                   $ {price}
                 </h3>
               </div>
-              <button onClick={() => handleAddToCart()}>ADD TO CART</button>
+              {contains() ? (
+                <button onClick={() => dispatch(removeFromCart(id))}>
+                  REMOVE FROM CART
+                </button>
+              ) : (
+                <button onClick={() => handleAddToCart()}>ADD TO CART</button>
+              )}
             </div>
           </div>
         </div>

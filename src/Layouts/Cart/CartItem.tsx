@@ -12,10 +12,18 @@ interface ICartItem {
   image: string
   price: number
   quantity: number
+  category: string
   id: number
 }
 
-const CartItem = ({ title, image, price, quantity, id }: ICartItem) => {
+const CartItem = ({
+  title,
+  image,
+  price,
+  quantity,
+  category,
+  id,
+}: ICartItem) => {
   const dispatch = useAppDispatch()
 
   const handleDecrease = () => {
@@ -37,6 +45,7 @@ const CartItem = ({ title, image, price, quantity, id }: ICartItem) => {
         <img src={image} alt={title} />
         <div className='cartItem__description'>
           <h3>{title}</h3>
+          <p>{category}</p>
         </div>
       </div>
       <div className='cartItem__footer'>

@@ -6,6 +6,7 @@ interface ICartItem {
   price: number
   id: number
   quantity: number
+  category: string
 }
 
 interface ICartList {
