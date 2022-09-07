@@ -14,6 +14,7 @@ interface ICartList {
 }
 
 interface IReduce {
+  quantity: number
   price: number
 }
 
@@ -29,6 +30,18 @@ export const cartListSlice = createSlice({
     addToCart: (state, action) => {
       state.entities = [...state.entities, action.payload]
     },
+    increase: (state, action) => {
+      const index = state.entities.findIndex(
+        (item) => item.id === action.payload.id
+      )
+      state.entities[index].quantity = action.payload.quantity
+    },
+    decrease: (state, action) => {
+      const index = state.entities.findIndex(
+        (item) => item.id === action.payload.id
+      )
+      state.entities[index].quantity = action.payload.quantity
+    },
     removeFromCart: (state, action) => {
       state.entities = state.entities.filter(
         (item) => item.id != action.payload
@@ -36,14 +49,14 @@ export const cartListSlice = createSlice({
     },
     getTotalPrice: (state) => {
       state.price = state.entities.reduce(
-        (sum: number, { price }: IReduce) => sum + price,
+        (sum: number, { quantity, price }: IReduce) => sum * quantity + price,
         0
       )
     },
   },
 })
 
-export const { addToCart, getTotalPrice, removeFromCart } =
+export const { addToCart, increase, decrease, getTotalPrice, removeFromCart } =
   cartListSlice.actions
 
 export default cartListSlice.reducer

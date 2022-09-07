@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAppDispatch } from '../../Store'
+import { useAppSelector, useAppDispatch } from '../../Store'
 import { addToCart, getTotalPrice } from '../../Store/features/cartListSlice'
 import './Product.css'
 
@@ -22,10 +22,11 @@ const Product = ({
 }: IProduct) => {
   const [isOpen, setIsOpen] = useState(false)
 
+  const cartList = useAppSelector((state) => state.cartList.entities)
   const dispatch = useAppDispatch()
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ title, image, price, 1: Number, id }))
+    dispatch(addToCart({ title, image, price, id, quantity: 1 }))
     dispatch(getTotalPrice())
   }
 

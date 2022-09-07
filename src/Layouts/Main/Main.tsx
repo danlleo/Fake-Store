@@ -17,6 +17,7 @@ interface ProductItem {
   id: number
   title: string
   price: number
+  quantity: number
   description: string
   category: string
   image: string
@@ -30,6 +31,7 @@ interface Props {
 const Main = ({ category }: Props) => {
   const dispatch = useAppDispatch()
   const loading = useAppSelector((state) => state.products.loading)
+  const cartList = useAppSelector((state) => state.cartList.entities)
   const entities: ProductItem[] = useAppSelector(
     (state) => state.products.entities
   )
@@ -75,7 +77,7 @@ const Main = ({ category }: Props) => {
             />
           ))}
         </div>
-        <CartButton />
+        {cartList.length && <CartButton />}
       </main>
       <Footer />
     </motion.div>

@@ -1,5 +1,10 @@
+import { useState } from 'react'
 import { useAppDispatch } from '../../Store'
-import { removeFromCart } from '../../Store/features/cartListSlice'
+import {
+  increase,
+  decrease,
+  removeFromCart,
+} from '../../Store/features/cartListSlice'
 import './CartItem.css'
 
 interface ICartItem {
@@ -12,6 +17,19 @@ interface ICartItem {
 
 const CartItem = ({ title, image, price, quantity, id }: ICartItem) => {
   const dispatch = useAppDispatch()
+
+  const handleDecrease = () => {
+    if (quantity === 1) {
+      dispatch(removeFromCart(id))
+      return
+    }
+
+    dispatch(decrease({ id, quantity: quantity - 1 }))
+  }
+
+  const handleIncrease = () => {
+    dispatch(increase({ id, quantity: quantity + 1 }))
+  }
 
   return (
     <div className='cartItem'>
@@ -26,7 +44,7 @@ const CartItem = ({ title, image, price, quantity, id }: ICartItem) => {
         <div className='cartItem__footer__counter'>
           <button
             onClick={() => {
-              dispatch(removeFromCart(id))
+              handleDecrease()
             }}
           >
             -
@@ -34,7 +52,7 @@ const CartItem = ({ title, image, price, quantity, id }: ICartItem) => {
           <div>
             <p>{quantity}</p>
           </div>
-          <button>+</button>
+          <button onClick={() => handleIncrease()}>+</button>
         </div>
       </div>
     </div>
