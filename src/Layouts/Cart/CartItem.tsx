@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useAppDispatch } from '../../Store'
 import {
   increase,
@@ -31,7 +30,6 @@ const CartItem = ({
       dispatch(removeFromCart(id))
       return
     }
-
     dispatch(decrease({ id, quantity: quantity - 1 }))
   }
 
