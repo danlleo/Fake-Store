@@ -35,14 +35,17 @@ export const cartListSlice = createSlice({
       const index = state.entities.findIndex(
         (item) => item.id === action.payload.id
       )
+      const quantity = state.entities[index].quantity
 
-      state.entities[index].quantity = action.payload.quantity
+      state.entities[index].quantity = quantity + 1
     },
     decrease: (state, action) => {
       const index = state.entities.findIndex(
         (item) => item.id === action.payload.id
       )
-      state.entities[index].quantity = action.payload.quantity
+      const quantity = state.entities[index].quantity
+
+      state.entities[index].quantity = quantity - 1
     },
     removeFromCart: (state, action) => {
       state.entities = state.entities.filter(
