@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useAppDispatch } from '../../Store'
 import {
   increase,
@@ -24,22 +23,19 @@ const CartItem = ({
   category,
   id,
 }: ICartItem) => {
-  const [count, setCount] = useState(quantity)
-
   const dispatch = useAppDispatch()
 
   const handleDecrease = () => {
-    if (count === 1) {
+    if (quantity === 1) {
       dispatch(removeFromCart(id))
       return
     }
-    setCount(quantity - 1)
+
     dispatch(decrease({ id }))
   }
 
   const handleIncrease = () => {
     dispatch(increase({ id }))
-    setCount(quantity + 1)
   }
 
   return (
@@ -70,7 +66,7 @@ const CartItem = ({
             -
           </button>
           <div>
-            <p>{count}</p>
+            <p>{quantity}</p>
           </div>
           <button onClick={() => handleIncrease()}>+</button>
         </div>

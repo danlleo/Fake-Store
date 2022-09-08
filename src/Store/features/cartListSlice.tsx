@@ -54,7 +54,7 @@ export const cartListSlice = createSlice({
     },
     getTotalPrice: (state) => {
       state.price = state.entities.reduce(
-        (sum: number, { quantity, price }: IReduce) => sum * quantity + price,
+        (sum: number, { quantity, price }: IReduce) => sum + quantity * price,
         0
       )
     },
